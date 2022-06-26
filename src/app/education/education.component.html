@@ -1,0 +1,98 @@
+<div id="educacion" class="container experience p-5 text-white">
+  <div class="header-experience mb-5">
+    <div class="row">
+      <div class="col-12 col-md-5">
+        <h3 class="h1 title-experience position-relative mt-4">Estudios</h3>
+        <p>
+          Si bien tengo conocimientos gracias a mi carrera y a mi certifiación
+          como desarrollador fullstack la mayor parte de mi experiencia y
+          conocimientos lo realice de manera autodidacta
+        </p>
+      </div>
+      <div class="col-12 col-md-7"></div>
+    </div>
+  </div>
+  <div class="list-experience p-4 rounded mt-4 mb-5">
+    <!--ITEM OF EDUCATION-->
+    <div
+      class="card item-experience my-3 bg-dark"
+      style="width: 60% !important"
+    >
+      <div *ngIf="isOnLine">
+        <button (click)="showModalEdit()" class="edit hover-opacity"></button>
+        <button class="del hover-opacity"></button>
+      </div>
+      <div class="card-header h2">Capacitación Desarrollo full Stack</div>
+      <div class="card-body">
+        <h5 class="card-title">Programa Argentina Programa</h5>
+        <h5 class="fecha fs-6 card-title">
+          Titulo a obtener: Desarrollador Web Full Stack Jr.
+        </h5>
+        <h5 class="fecha fs-6 card-title pb-2 mb-3">febrero 2022 - Presente</h5>
+      </div>
+    </div>
+
+    <!--DECLARACIONES DE LAS VENTANAS MODAL-->
+
+    <div
+      *ngIf="switchForm"
+      class="bg-modal d-flex justify-content-center align-items-center"
+    >
+      <div class="p-5 bg-light text-dark position-relative">
+        <button (click)="closeModal()" class="close position-absolute"></button>
+        <form [formGroup]="form" (submit)="handleSubmit($event)">
+          <div>
+            <label class="form-label fw-bold">Titulo:</label>
+            <input class="form-control" type="text" formControlName="nombre" />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Institución:</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="institucion"
+            />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Título:</label>
+            <input class="form-control" type="text" formControlName="titulo" />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Fecha de Inicio:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaInicio"
+            />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Fecha de Fin:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaFin"
+            />
+          </div>
+          <br />
+          <div class="form-check">
+            <label class="form-check-label">Presente</label>
+            <input
+              class="form-check-input"
+              value=""
+              type="checkbox"
+              formControlName="presente"
+            />
+          </div>
+          <br />
+          <div>
+            <button class="btn btn-primary">Editar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

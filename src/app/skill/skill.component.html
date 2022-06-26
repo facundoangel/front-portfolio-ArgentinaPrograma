@@ -1,0 +1,106 @@
+<div
+  id="Habilidades"
+  class="container-fluid bg-light position-relative bg-skills p-5"
+>
+  <div class="container position-relative">
+    <div class="header-skill mb-5">
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <h3 class="h1 title-skill position-relative my-5">Habilidades</h3>
+        </div>
+        <div class="col-12 col-md-7"></div>
+      </div>
+      <div class="grid-skills px-3 py-5 rounded">
+        <div class="row">
+          <div class="col-6 col-lg-3">
+            <div class="p-4 mt-3">
+              <div
+                skill-name="JAVASCRIPT"
+                class="item-skill rounded-circle shadow bg-gradient d-flex flex-column justify-content-between align-items-center"
+                style="background-color: #19212e"
+              >
+                <div *ngIf="isOnLine">
+                  <button
+                    (click)="showModal()"
+                    class="edit hover-opacity"
+                  ></button>
+                  <button
+                    (click)="showModal()"
+                    class="del hover-opacity"
+                  ></button>
+                </div>
+                <img
+                  class="logo-skill"
+                  src="https://i.imgur.com/h8oNzHS.png"
+                  alt="logo skill"
+                />
+                <div
+                  class="w-75 d-flex flex-column align-items-center justify-content-center flex-grow-1"
+                >
+                  <div
+                    class="progress bg-transparent d-flex w-75 justify-content-center align-items-end"
+                  >
+                    <div
+                      class="element-1 mx-1"
+                      style="height: 35%; background-color: #88ff63"
+                    ></div>
+                    <div
+                      class="element-2 mx-1"
+                      style="height: 70%; background-color: #88ff63"
+                    ></div>
+                    <div
+                      class="element-3 mx-1"
+                      style="height: 100%; background-color: #6b8c61"
+                    ></div>
+                  </div>
+                  <p
+                    class="text-light"
+                    style="font-size: 0.8rem; font-weight: bold"
+                  >
+                    Intermedio
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" *ngIf="isOnLine">
+            <button
+              (click)="showModal()"
+              style="border: none; background: none; width: 100%"
+            >
+              <div class="p-4 mt-3">
+                <div
+                  class="item-add item-skill rounded-circle d-flex flex-column justify-content-center align-items-center"
+                >
+                  <img
+                    class="icon-plus"
+                    src="../../assets/logos/icon-plus.svg"
+                    alt="plus"
+                  />
+                  <p
+                    style="font-size: 0.8rem; font-weight: bold; color: #19212e"
+                  >
+                    Agregar <br />
+                    Habilidad
+                  </p>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--DECLARACIONES DE LAS VENTANAS MODAL-->
+
+<div
+  *ngIf="switchForm"
+  class="bg-modal d-flex justify-content-center align-items-center"
+>
+  <div class="p-5 bg-light position-relative">
+    <button (click)="closeModal()" class="close position-absolute"></button>
+    <form action="">form skill</form>
+  </div>
+</div>

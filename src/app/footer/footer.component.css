@@ -1,0 +1,22 @@
+footer {
+  background: linear-gradient(
+    101deg,
+    rgba(131, 58, 180, 1) 18%,
+    rgba(252, 69, 220, 1) 100%
+  );
+}
+
+#email {
+  overflow: hidden;
+  text-decoration: none;
+}
+
+#email-direction {
+  transform: translateY(20%);
+  max-width: 0;
+  transition: all 1s;
+  user-select: all;
+}
+#email:hover #email-direction {
+  max-width: 18em;
+}
