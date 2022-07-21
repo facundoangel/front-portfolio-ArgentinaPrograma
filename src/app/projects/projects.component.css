@@ -152,3 +152,7 @@ a {
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+input:not(input[class*="form-check"]) {
+  min-width: 300px;
+}

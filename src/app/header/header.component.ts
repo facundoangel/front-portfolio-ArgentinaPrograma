@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit {
     let usuario = $event.target[0].value;
     let contra = $event.target[1].value;
     alert(`usuario:${usuario} contraseña:${contra}`);
+    if (contra == '1234') this.handleSession();
     $event.target.reset();
     this.closeModal();
   }

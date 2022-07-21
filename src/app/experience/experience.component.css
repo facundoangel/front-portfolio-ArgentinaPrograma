@@ -136,6 +136,7 @@
 .bg-modal {
   background-color: rgba(0, 0, 0, 0.514);
   position: fixed;
+  padding: 30px;
   top: 0;
   left: 0;
   z-index: 1040;
@@ -155,4 +156,8 @@
   background-size: 60%;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+input:not(input[class*="form-check"]) {
+  min-width: 300px;
 }

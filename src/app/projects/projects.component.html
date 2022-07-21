@@ -11,112 +11,11 @@
     <!--ITEM OF PROJECT-->
     <div class="card item-experience my-3 bg-dark">
       <div *ngIf="isOnLine">
-        <button class="edit hover-opacity" (click)="showModal()"></button>
-        <button class="del hover-opacity" (click)="showModal()"></button>
-      </div>
-      <div class="card-header h2">Ajax Test</div>
-      <div class="card-body">
-        <div class="row">
-          <div
-            class="presentacion-trabajo col-12 col-md-6 px-4 d-flex justify-content-center flex-column align-items-start"
-          >
-            <img
-              src="../../assets/miniatura proyecto 1.JPG"
-              alt="proyecto-1"
-              class="img-fluid"
-            />
-          </div>
-          <div
-            class="col-12 col-md-6 d-flex flex-column justify-content-start lign-items-center position-relative descripcion-trabajo"
-          >
-            <p class="descripcion">
-              Este proyecto fue mi primer pagina web, en donde practique mis
-              primeros pasos en las peticiones ajax utilizando tres diferentes
-              metodos, usa javascript nativo sin framework
-            </p>
-            <div class="divisor"></div>
-            <div class="tecnologias">
-              <img
-                class="my-2 mx-1"
-                src="../../assets/logos/2.png"
-                alt="html"
-                height="30px"
-              />
-              <img
-                class="my-3 mx-1"
-                src="../../assets/logos/3.png"
-                alt="html"
-                height="30px"
-              />
-              <img
-                class="my-1 mx-1"
-                src="../../assets/logos/1.png"
-                alt="html"
-                height="30px"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--ITEM OF PROJECT-->
-    <div class="card item-experience my-3 bg-dark">
-      <div *ngIf="isOnLine">
-        <button class="edit hover-opacity" (click)="showModal()"></button>
-        <button class="del hover-opacity" (click)="showModal()"></button>
-      </div>
-      <div class="card-header h2">Ajax Test</div>
-      <div class="card-body">
-        <div class="row">
-          <div
-            class="presentacion-trabajo col-12 col-md-6 px-4 d-flex justify-content-center flex-column align-items-start"
-          >
-            <img
-              src="../../assets/miniatura proyecto 1.JPG"
-              alt="proyecto-1"
-              class="img-fluid"
-            />
-          </div>
-          <div
-            class="col-12 col-md-6 d-flex flex-column justify-content-start lign-items-center position-relative descripcion-trabajo"
-          >
-            <p class="descripcion">
-              Este proyecto fue mi primer pagina web, en donde practique mis
-              primeros pasos en las peticiones ajax utilizando tres diferentes
-              metodos, usa javascript nativo sin framework
-            </p>
-            <div class="divisor"></div>
-            <div class="tecnologias">
-              <img
-                class="my-2 mx-1"
-                src="../../assets/logos/2.png"
-                alt="html"
-                height="30px"
-              />
-              <img
-                class="my-3 mx-1"
-                src="../../assets/logos/3.png"
-                alt="html"
-                height="30px"
-              />
-              <img
-                class="my-1 mx-1"
-                src="../../assets/logos/1.png"
-                alt="html"
-                height="30px"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--ITEM OF PROJECT-->
-    <div class="card item-experience my-3 bg-dark">
-      <div *ngIf="isOnLine">
-        <button class="edit hover-opacity" (click)="showModal()"></button>
-        <button class="del hover-opacity" (click)="showModal()"></button>
+        <button class="edit hover-opacity" (click)="showModal('edit')"></button>
+        <button
+          class="del hover-opacity"
+          (click)="showModal('delete')"
+        ></button>
       </div>
       <div class="card-header h2">Ajax Test</div>
       <div class="card-body">
@@ -165,7 +64,7 @@
     </div>
 
     <!--ITEM OF ADD ITEM-->
-    <button class="add-button" (click)="showModal()">
+    <button class="add-button" (click)="showModal('create')">
       <div *ngIf="isOnLine" class="item-add">
         <div
           class="logo-add d-flex flex-column align-items-center justify-content-center"
@@ -186,12 +85,176 @@
 
 <!--DECLARACIONES DE LAS VENTANAS MODAL-->
 
+<!--VENTANA MODAL DE EDICION-->
 <div
-  *ngIf="switchForm"
+  *ngIf="switchFormEdit"
   class="bg-modal d-flex justify-content-center align-items-center"
 >
-  <div class="p-5 bg-light position-relative">
+  <div class="p-5 bg-light text-dark position-relative">
     <button (click)="closeModal()" class="close position-absolute"></button>
-    <form action="">form project</form>
+    <form
+      [formGroup]="form"
+      class="position-relative"
+      (submit)="handleSubmit($event)"
+    >
+      <div class="row">
+        <div class="col">
+          <div>
+            <label class="form-label fw-bold">Empresa:</label>
+            <input class="form-control" type="text" formControlName="empresa" />
+          </div>
+          <br />
+
+          <div>
+            <label class="form-label fw-bold">Fecha de Inicio:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaInicio"
+            />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Fecha de Fin:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaFin"
+            />
+          </div>
+          <br />
+          <div class="form-check">
+            <label class="form-check-label">Presente</label>
+            <input
+              class="form-check-input"
+              value=""
+              type="checkbox"
+              formControlName="presente"
+            />
+          </div>
+          <br />
+        </div>
+        <div class="col">
+          <div>
+            <label class="form-label fw-bold">Puesto:</label>
+            <input class="form-control" type="text" formControlName="puesto" />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">tareas:</label>
+            <textarea
+              class="form-control"
+              rows="6"
+              style="resize: none"
+              formControlName="tareas"
+            ></textarea>
+          </div>
+          <br />
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary">Editar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--VENTANA MODAL DE CREACION-->
+<div
+  *ngIf="switchFormCreate"
+  class="bg-modal d-flex justify-content-center align-items-center"
+>
+  <div class="p-5 bg-light text-dark position-relative">
+    <button (click)="closeModal()" class="close position-absolute"></button>
+    <form
+      [formGroup]="form"
+      class="position-relative"
+      (submit)="handleSubmit($event)"
+    >
+      <div class="row">
+        <div class="col">
+          <div>
+            <label class="form-label fw-bold">Empresa:</label>
+            <input class="form-control" type="text" formControlName="empresa" />
+          </div>
+          <br />
+
+          <div>
+            <label class="form-label fw-bold">Fecha de Inicio:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaInicio"
+            />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">Fecha de Fin:</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fechaFin"
+            />
+          </div>
+          <br />
+          <div class="form-check">
+            <label class="form-check-label">Presente</label>
+            <input
+              class="form-check-input"
+              value=""
+              type="checkbox"
+              formControlName="presente"
+            />
+          </div>
+          <br />
+        </div>
+        <div class="col">
+          <div>
+            <label class="form-label fw-bold">Puesto:</label>
+            <input class="form-control" type="text" formControlName="puesto" />
+          </div>
+          <br />
+          <div>
+            <label class="form-label fw-bold">tareas:</label>
+            <textarea
+              class="form-control"
+              rows="6"
+              style="resize: none"
+              formControlName="tareas"
+            ></textarea>
+          </div>
+          <br />
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary">Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--VENTANA MODAL DE ELIMINACIÓN-->
+<div
+  *ngIf="switchFormDelete"
+  class="bg-modal d-flex justify-content-center align-items-center"
+>
+  <div class="p-5 bg-light text-dark position-relative">
+    <button (click)="closeModal()" class="close position-absolute"></button>
+    <form
+      [formGroup]="form"
+      class="position-relative text-center"
+      (submit)="handleSubmit($event)"
+    >
+      <img class="w-25" src="../../assets/trash-icon.gif" alt="delete" />
+      <h3 class="my-5">¿Estas seguro que deseas eliminar?</h3>
+      <div class="text-center">
+        <button class="btn btn-danger mx-2">Eliminar</button>
+        <button (click)="closeModal()" class="btn btn-primary mx-2">
+          Cancelar
+        </button>
+      </div>
+    </form>
   </div>
 </div>
