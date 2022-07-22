@@ -1,9 +1,5 @@
 footer {
-  background: linear-gradient(
-    101deg,
-    rgba(131, 58, 180, 1) 18%,
-    rgba(252, 69, 220, 1) 100%
-  );
+  background: rgb(37, 37, 37);
 }
 
 #email {

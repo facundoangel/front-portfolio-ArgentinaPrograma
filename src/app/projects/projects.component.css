@@ -156,3 +156,18 @@ a {
 input:not(input[class*="form-check"]) {
   min-width: 300px;
 }
+
+.btn-sites {
+  background: linear-gradient(
+    101deg,
+    rgba(131, 58, 180, 1) 18%,
+    rgba(252, 69, 220, 1) 100%
+  );
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-sites:hover {
+  box-shadow: 1px 1px 5px rgba(131, 58, 180, 1),
+    -1px -1px 5px rgba(252, 69, 220, 1);
+}

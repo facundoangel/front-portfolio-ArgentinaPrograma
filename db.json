@@ -1,5 +1,11 @@
 {
-  "experience": [
+  "basicInfo": [
+    { "photo": "../../assets/foto-perfil.jfif" },
+    {
+      "presentation": "Me considero un entusiasta y autodidacta de la informatica. particularmente me aboco mas al desarrollo web pero me interesan todos los campos de la informatica. Considero que me desenvuelvo bien trabajando en equipo y priorizando tareas."
+    }
+  ],
+  "experiences": [
     {
       "position": "Administrativo - Atención al Público",
       "company": "Universidad Nacional de La Matanza",
@@ -17,6 +23,34 @@
       "company": "Municipio de Lanús - Pasantias",
       "date": "09/2016 - 11/2016",
       "tasks": "1Ea ea id adipisicing cupidatat cillum sunt cillum consequat cillum irure. Aute sunt eiusmod cupidatat ex ad. Et est velit aliquip exercitation officia labore est. Qui eiusmod esse aute aliquip cillum cupidatat minim anim."
+    }
+  ],
+  "educations": [
+    {
+      "name": "Capacitación Desarrollo full Stack",
+      "institution": "Programa Argentina Programa",
+      "title": "Desarrollador Web Full Stack Jr.",
+      "date": "10/2021 - Presente"
+    }
+  ],
+  "skills": [
+    {
+      "name": "javascript",
+      "photo": "https://i.imgur.com/h8oNzHS.png",
+      "level": "Intermedio"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Ajax Test",
+      "photo": "../../assets/miniatura proyecto 1.JPG",
+      "description": "Este proyecto fue mi primer pagina web, en donde practique mis primeros pasos en las peticiones ajax utilizando tres diferentes metodos, usa javascript nativo sin framework",
+      "url": "https://facundoangel.github.io/proyecto-ajax/",
+      "tecnologies": [
+        "../../assets/logos/2.png",
+        "../../assets/logos/3.png",
+        "../../assets/logos/1.png"
+      ]
     }
   ]
 }

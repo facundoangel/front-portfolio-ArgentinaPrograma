@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ResourceAjaxService } from '../services/resources-ajax.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { education } from '../interfaces/education';
 
 @Component({
   selector: 'app-education',
@@ -11,8 +13,13 @@ export class EducationComponent implements OnInit {
   switchFormEdit: Boolean;
   switchFormCreate: Boolean;
   switchFormDelete: Boolean;
+  educations: education[];
   form: FormGroup;
-  constructor(private Auth: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private Auth: AuthService,
+    private formBuilder: FormBuilder,
+    private ajax: ResourceAjaxService
+  ) {
     this.form = this.formBuilder.group({
       nombre: ['', []],
       institucion: ['', []],
@@ -20,6 +27,13 @@ export class EducationComponent implements OnInit {
       fechaInicio: ['', []],
       fechaFin: ['', []],
       presente: ['', []],
+    });
+    this.getEducations();
+  }
+
+  public getEducations(): void {
+    this.ajax.getEducations().subscribe((data) => {
+      this.educations = data;
     });
   }
 

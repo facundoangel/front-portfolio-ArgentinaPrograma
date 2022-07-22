@@ -17,6 +17,7 @@
     <div
       class="card item-experience my-3 bg-dark"
       style="width: 60% !important"
+      *ngFor="let ed of educations"
     >
       <div *ngIf="isOnLine">
         <button (click)="showModal('edit')" class="edit hover-opacity"></button>
@@ -25,13 +26,11 @@
           class="del hover-opacity"
         ></button>
       </div>
-      <div class="card-header h2">Capacitación Desarrollo full Stack</div>
+      <div class="card-header h2">{{ ed.name }}</div>
       <div class="card-body">
-        <h5 class="card-title">Programa Argentina Programa</h5>
-        <h5 class="fecha fs-6 card-title">
-          Titulo a obtener: Desarrollador Web Full Stack Jr.
-        </h5>
-        <h5 class="fecha fs-6 card-title pb-2 mb-3">febrero 2022 - Presente</h5>
+        <h5 class="card-title">{{ ed.institution }}</h5>
+        <h5 class="fecha fs-6 card-title">Titulo a obtener: {{ ed.title }}</h5>
+        <h5 class="fecha fs-6 card-title pb-2 mb-3">{{ ed.date }}</h5>
       </div>
     </div>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResourceAjaxService } from '../services/resources-ajax.service';
+import { skill } from '../interfaces/skill';
 
 @Component({
   selector: 'app-skill',
@@ -11,14 +13,20 @@ export class SkillComponent implements OnInit {
   switchFormEdit: Boolean;
   switchFormCreate: Boolean;
   switchFormDelete: Boolean;
+  skills: skill[];
   form: FormGroup;
 
-  constructor(private Auth: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private Auth: AuthService,
+    private formBuilder: FormBuilder,
+    private ajax: ResourceAjaxService
+  ) {
     this.form = this.formBuilder.group({
       nombre: ['', []],
       imagen: ['', []],
       conocimiento: ['', []],
     });
+    this.getSkills();
   }
 
   public get isOnLine(): boolean {
@@ -26,6 +34,12 @@ export class SkillComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  public getSkills() {
+    return this.ajax.getSkills().subscribe((data) => {
+      this.skills = data;
+    });
+  }
 
   public showModal(typeModal: string) {
     switch (typeModal) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { project } from '../interfaces/project';
+import { ResourceAjaxService } from '../services/resources-ajax.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,9 +13,14 @@ export class ProjectsComponent implements OnInit {
   switchFormEdit: Boolean;
   switchFormCreate: Boolean;
   switchFormDelete: Boolean;
+  projects: project[];
   form: FormGroup;
 
-  constructor(private Auth: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private Auth: AuthService,
+    private formBuilder: FormBuilder,
+    private ajax: ResourceAjaxService
+  ) {
     this.form = this.formBuilder.group({
       empresa: ['', []],
       puesto: ['', []],
@@ -21,6 +28,14 @@ export class ProjectsComponent implements OnInit {
       fechaInicio: ['', []],
       fechaFin: ['', []],
       presente: ['', []],
+    });
+
+    this.getProjects();
+  }
+
+  public getProjects() {
+    return this.ajax.getProjects().subscribe((data: project[]) => {
+      this.projects = data;
     });
   }
 

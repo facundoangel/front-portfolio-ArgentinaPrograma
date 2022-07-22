@@ -9,7 +9,7 @@
   </div>
   <div class="list-experience p-4 rounded mt-4 mb-5">
     <!--ITEM OF PROJECT-->
-    <div class="card item-experience my-3 bg-dark">
+    <div *ngFor="let pr of projects" class="card item-experience my-3 bg-dark">
       <div *ngIf="isOnLine">
         <button class="edit hover-opacity" (click)="showModal('edit')"></button>
         <button
@@ -17,46 +17,38 @@
           (click)="showModal('delete')"
         ></button>
       </div>
-      <div class="card-header h2">Ajax Test</div>
+      <div class="card-header h2">{{ pr.name }}</div>
       <div class="card-body">
         <div class="row">
           <div
             class="presentacion-trabajo col-12 col-md-6 px-4 d-flex justify-content-center flex-column align-items-start"
           >
-            <img
-              src="../../assets/miniatura proyecto 1.JPG"
-              alt="proyecto-1"
-              class="img-fluid"
-            />
+            <a [href]="pr.url" target="_blank">
+              <img [src]="pr.photo" alt="proyecto-1" class="img-fluid" />
+            </a>
           </div>
           <div
             class="col-12 col-md-6 d-flex flex-column justify-content-start lign-items-center position-relative descripcion-trabajo"
           >
-            <p class="descripcion">
-              Este proyecto fue mi primer pagina web, en donde practique mis
-              primeros pasos en las peticiones ajax utilizando tres diferentes
-              metodos, usa javascript nativo sin framework
-            </p>
+            <p class="descripcion">{{ pr.description }}</p>
             <div class="divisor"></div>
             <div class="tecnologias">
               <img
+                *ngFor="let tech of pr.tecnologies"
                 class="my-2 mx-1"
-                src="../../assets/logos/2.png"
+                [src]="tech"
                 alt="html"
                 height="30px"
               />
-              <img
-                class="my-3 mx-1"
-                src="../../assets/logos/3.png"
-                alt="html"
-                height="30px"
-              />
-              <img
-                class="my-1 mx-1"
-                src="../../assets/logos/1.png"
-                alt="html"
-                height="30px"
-              />
+              <br />
+              <div class="text-center">
+                <a
+                  [href]="pr.url"
+                  target="_blank"
+                  class="btn btn-primary btn-sites px-3"
+                  >Ver sitio</a
+                >
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { endWith } from 'rxjs';
+import { ResourceAjaxService } from '../services/resources-ajax.service';
+import { Experience } from '../interfaces/experience';
 
 @Component({
   selector: 'app-experience',
@@ -12,9 +13,14 @@ export class ExperienceComponent implements OnInit {
   switchFormEdit: Boolean;
   switchFormCreate: Boolean;
   switchFormDelete: Boolean;
+  experiences: Experience[];
   form: FormGroup;
 
-  constructor(private Auth: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private Auth: AuthService,
+    private formBuilder: FormBuilder,
+    private ajax: ResourceAjaxService
+  ) {
     this.form = this.formBuilder.group({
       empresa: ['', []],
       puesto: ['', []],
@@ -29,7 +35,15 @@ export class ExperienceComponent implements OnInit {
     return this.Auth.logIn;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getExperiences();
+  }
+
+  public getExperiences(): void {
+    this.ajax.getExperiences().subscribe((data) => {
+      this.experiences = data;
+    });
+  }
 
   public showModal(typeModal: string) {
     switch (typeModal) {

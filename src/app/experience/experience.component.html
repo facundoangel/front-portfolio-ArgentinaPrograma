@@ -15,7 +15,10 @@
   </div>
   <div class="list-experience p-4 rounded mt-4 mb-5">
     <!--ITEM OF EXPERIENCE-->
-    <div class="card item-experience my-3 bg-dark">
+    <div
+      *ngFor="let experience of experiences"
+      class="card item-experience my-3 bg-dark"
+    >
       <div *ngIf="isOnLine">
         <button (click)="showModal('edit')" class="edit hover-opacity"></button>
         <button
@@ -23,27 +26,22 @@
           class="del hover-opacity"
         ></button>
       </div>
-      <div class="card-header h2">Administrativo</div>
+      <div class="card-header h2">{{ experience.position }}</div>
       <div class="card-body">
         <div class="row">
           <div
             class="presentacion-trabajo col-12 col-md-3 px-4 d-flex justify-content-center flex-column align-items-start"
           >
-            <h5 class="card-title">Municipio de Lanús</h5>
-            <h5 class="fecha fs-6 card-title pb-2 mb-3">2017-Presente</h5>
+            <h5 class="card-title">{{ experience.company }}</h5>
+            <h5 class="fecha fs-6 card-title pb-2 mb-3">
+              {{ experience.date }}
+            </h5>
           </div>
           <div
             class="col-12 col-md-9 d-flex align-items-center position-relative descripcion-trabajo"
           >
             <p class="px-4 card-text">
-              With supporting text below as a natural lead-in to additional
-              content.<br />
-              With supporting text below as a natural lead-in to additional
-              content.<br />
-              With supporting text below as a natural lead-in to additional
-              content.<br />
-              With supporting text below as a natural lead-in to additional
-              content.
+              {{ experience.tasks }}
             </p>
           </div>
         </div>

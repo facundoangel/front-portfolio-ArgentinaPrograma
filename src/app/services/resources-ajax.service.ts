@@ -5,10 +5,22 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class ResourceAjaxService {
   constructor(private http: HttpClient) {}
 
   getExperiences(): Observable<any> {
-    return this.http.get('https://localhost:3000/experience');
+    return this.http.get('http://localhost:3000/experiences');
+  }
+
+  getEducations(): Observable<any> {
+    return this.http.get('http://localhost:3000/educations');
+  }
+
+  getSkills(): Observable<any> {
+    return this.http.get('http://localhost:3000/skills');
+  }
+
+  getProjects(): Observable<any> {
+    return this.http.get('http://localhost:3000/projects');
   }
 }
