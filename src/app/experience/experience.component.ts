@@ -24,14 +24,23 @@ export class ExperienceComponent implements OnInit {
     tasks: '',
   };
   experiences: Experience[];
-  form: FormGroup;
+  formEdit: FormGroup;
+  formCreate: FormGroup;
 
   constructor(
     private Auth: AuthService,
     private formBuilder: FormBuilder,
     private ajax: ResourceAjaxService
   ) {
-    this.form = this.formBuilder.group({
+    this.formCreate = this.formBuilder.group({
+      empresa: ['', []],
+      puesto: ['', []],
+      tareas: ['', []],
+      fechaInicio: ['', []],
+      fechaFin: ['', []],
+      presente: ['', []],
+    });
+    this.formEdit = this.formBuilder.group({
       empresa: ['', []],
       puesto: ['', []],
       tareas: ['', []],

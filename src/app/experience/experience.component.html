@@ -85,7 +85,7 @@
   <div class="p-5 bg-light text-dark position-relative">
     <button (click)="closeModal()" class="close position-absolute"></button>
     <form
-      [formGroup]="form"
+      [formGroup]="formEdit"
       class="position-relative"
       (submit)="handleSubmit($event)"
       data-id="{{ resourceToEdit.id }}"
@@ -182,7 +182,7 @@
   <div class="p-5 bg-light text-dark position-relative">
     <button (click)="closeModal()" class="close position-absolute"></button>
     <form
-      [formGroup]="form"
+      [formGroup]="formCreate"
       class="position-relative"
       (submit)="handleSubmit($event)"
     >
@@ -271,11 +271,7 @@
 >
   <div class="p-5 bg-light text-dark position-relative">
     <button (click)="closeModal()" class="close position-absolute"></button>
-    <form
-      [formGroup]="form"
-      class="position-relative text-center"
-      (submit)="handleSubmit($event)"
-    >
+    <form class="position-relative text-center" (submit)="handleSubmit($event)">
       <img class="w-25" src="../../assets/trash-icon.gif" alt="delete" />
       <h3 class="my-5">¿Estas seguro que deseas eliminar?</h3>
       <div class="text-center">
