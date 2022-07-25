@@ -13,6 +13,16 @@ export class ExperienceComponent implements OnInit {
   switchFormEdit: Boolean;
   switchFormCreate: Boolean;
   switchFormDelete: Boolean;
+  resourceToDelete: [String, number | null];
+  resourceToEdit: Experience;
+  resourceToCreate: any = {
+    id: null,
+    position: '',
+    company: '',
+    dateStart: '',
+    dateEnd: '',
+    tasks: '',
+  };
   experiences: Experience[];
   form: FormGroup;
 
@@ -45,24 +55,35 @@ export class ExperienceComponent implements OnInit {
     });
   }
 
-  public showModal(typeModal: string) {
-    switch (typeModal) {
-      case 'create':
-        this.switchFormCreate = true;
-        break;
-      case 'edit':
-        this.switchFormEdit = true;
-        break;
-      case 'delete':
-        this.switchFormDelete = true;
-        break;
-    }
+  public showCreateModal() {
+    this.switchFormCreate = true;
+  }
+
+  public showDeleteModal(categoryResource: String, idResource: number | null) {
+    this.switchFormDelete = true;
+    this.resourceToDelete = [categoryResource, idResource];
+  }
+
+  public showEditModal(experience: Experience) {
+    this.resourceToEdit = experience;
+    this.switchFormEdit = true;
   }
 
   public closeModal() {
     this.switchFormCreate = false;
     this.switchFormEdit = false;
     this.switchFormDelete = false;
+  }
+
+  public convertDate(date: string): string {
+    if (date == 'Presente') {
+      return date;
+    }
+    return new Date(date).toLocaleDateString();
+  }
+
+  public isPresent(date: string): any {
+    return date == 'Presente' ? true : null;
   }
 
   public handleSubmit($event: any) {
@@ -84,6 +105,55 @@ export class ExperienceComponent implements OnInit {
       `
     );
     $event.target.reset();
+    this.closeModal();
+  }
+
+  public handleDelete() {
+    console.log(this.resourceToDelete);
+    this.ajax.deleteResource(
+      this.resourceToDelete[0],
+      this.resourceToDelete[1]
+    );
+    this.experiences = this.experiences.filter(
+      (experience) => experience.id !== this.resourceToDelete[1]
+    );
+    this.closeModal();
+  }
+
+  public handleEdit($event: any) {
+    let form = $event.target.parentElement.parentElement;
+    this.resourceToEdit.id = form.id;
+    this.resourceToEdit.position = form.position.value;
+    this.resourceToEdit.company = form.company.value;
+    this.resourceToEdit.dateStart = form.dateStart.value;
+    this.resourceToEdit.dateEnd = form.dateEnd.value;
+    this.resourceToEdit.tasks = form.tasks.value;
+
+    this.ajax.editResource(
+      'experiences',
+      this.resourceToEdit.id,
+      this.resourceToEdit
+    );
+  }
+
+  public handleCreate($event: any) {
+    $event.preventDefault();
+    let form = $event.target.parentElement.parentElement;
+
+    this.resourceToCreate.id = null;
+    this.resourceToCreate.position = form.position.value;
+    this.resourceToCreate.company = form.company.value;
+    this.resourceToCreate.dateStart = form.dateStart.value;
+    this.resourceToCreate.dateEnd = form.now.checked
+      ? 'Presente'
+      : form.dateEnd.value;
+    this.resourceToCreate.tasks = form.tasks.value;
+
+    form.reset();
+
+    this.ajax.createResource('experiences', this.resourceToCreate);
+    this.experiences.push(this.resourceToCreate);
+
     this.closeModal();
   }
 }

@@ -20,9 +20,12 @@
       class="card item-experience my-3 bg-dark"
     >
       <div *ngIf="isOnLine">
-        <button (click)="showModal('edit')" class="edit hover-opacity"></button>
         <button
-          (click)="showModal('delete')"
+          (click)="showEditModal(experience)"
+          class="edit hover-opacity"
+        ></button>
+        <button
+          (click)="showDeleteModal('experiences', experience.id)"
           class="del hover-opacity"
         ></button>
       </div>
@@ -34,7 +37,11 @@
           >
             <h5 class="card-title">{{ experience.company }}</h5>
             <h5 class="fecha fs-6 card-title pb-2 mb-3">
-              {{ experience.date }}
+              {{
+                convertDate(experience.dateStart) +
+                  " - " +
+                  convertDate(experience.dateEnd)
+              }}
             </h5>
           </div>
           <div
@@ -49,7 +56,7 @@
     </div>
 
     <!--ITEM OF ADD ITEM-->
-    <button class="add-button" (click)="showModal('create')">
+    <button (click)="showCreateModal()" class="add-button">
       <div *ngIf="isOnLine" class="item-add">
         <div
           class="logo-add d-flex flex-column align-items-center justify-content-center"
@@ -81,30 +88,41 @@
       [formGroup]="form"
       class="position-relative"
       (submit)="handleSubmit($event)"
+      data-id="{{ resourceToEdit.id }}"
     >
       <div class="row">
         <div class="col">
           <div>
             <label class="form-label fw-bold">Empresa:</label>
-            <input class="form-control" type="text" formControlName="empresa" />
+            <input
+              ngModel="{{ resourceToEdit.company }}"
+              class="form-control"
+              type="text"
+              formControlName="empresa"
+              name="company"
+            />
           </div>
           <br />
 
           <div>
             <label class="form-label fw-bold">Fecha de Inicio:</label>
             <input
+              ngModel="{{ resourceToEdit.dateStart }}"
               class="form-control"
               type="date"
               formControlName="fechaInicio"
+              name="dateStart"
             />
           </div>
           <br />
           <div>
             <label class="form-label fw-bold">Fecha de Fin:</label>
             <input
+              ngModel="{{ resourceToEdit.dateEnd }}"
               class="form-control"
               type="date"
               formControlName="fechaFin"
+              name="dateEnd"
             />
           </div>
           <br />
@@ -112,9 +130,10 @@
             <label class="form-check-label">Presente</label>
             <input
               class="form-check-input"
-              value=""
+              ngModel="{{ isPresent(resourceToEdit.dateEnd) }}"
               type="checkbox"
               formControlName="presente"
+              name="presente"
             />
           </div>
           <br />
@@ -122,16 +141,24 @@
         <div class="col">
           <div>
             <label class="form-label fw-bold">Puesto:</label>
-            <input class="form-control" type="text" formControlName="puesto" />
+            <input
+              ngModel="{{ resourceToEdit.position }}"
+              class="form-control"
+              type="text"
+              formControlName="puesto"
+              name="position"
+            />
           </div>
           <br />
           <div>
             <label class="form-label fw-bold">tareas:</label>
             <textarea
+              ngModel="{{ resourceToEdit.tasks }}"
               class="form-control"
               rows="6"
               style="resize: none"
               formControlName="tareas"
+              name="tasks"
             ></textarea>
           </div>
           <br />
@@ -139,7 +166,9 @@
       </div>
 
       <div class="text-center">
-        <button class="btn btn-primary">Editar</button>
+        <button (click)="handleEdit($event)" class="btn btn-primary">
+          Editar
+        </button>
       </div>
     </form>
   </div>
@@ -161,7 +190,12 @@
         <div class="col">
           <div>
             <label class="form-label fw-bold">Empresa:</label>
-            <input class="form-control" type="text" formControlName="empresa" />
+            <input
+              name="company"
+              class="form-control"
+              type="text"
+              formControlName="empresa"
+            />
           </div>
           <br />
 
@@ -170,6 +204,7 @@
             <input
               class="form-control"
               type="date"
+              name="dateStart"
               formControlName="fechaInicio"
             />
           </div>
@@ -179,6 +214,7 @@
             <input
               class="form-control"
               type="date"
+              name="dateEnd"
               formControlName="fechaFin"
             />
           </div>
@@ -187,7 +223,7 @@
             <label class="form-check-label">Presente</label>
             <input
               class="form-check-input"
-              value=""
+              name="now"
               type="checkbox"
               formControlName="presente"
             />
@@ -197,7 +233,12 @@
         <div class="col">
           <div>
             <label class="form-label fw-bold">Puesto:</label>
-            <input class="form-control" type="text" formControlName="puesto" />
+            <input
+              class="form-control"
+              type="text"
+              formControlName="puesto"
+              name="position"
+            />
           </div>
           <br />
           <div>
@@ -207,6 +248,7 @@
               rows="6"
               style="resize: none"
               formControlName="tareas"
+              name="tasks"
             ></textarea>
           </div>
           <br />
@@ -214,7 +256,9 @@
       </div>
 
       <div class="text-center">
-        <button class="btn btn-primary">Crear</button>
+        <button (click)="handleCreate($event)" class="btn btn-primary">
+          Crear
+        </button>
       </div>
     </form>
   </div>
@@ -235,7 +279,9 @@
       <img class="w-25" src="../../assets/trash-icon.gif" alt="delete" />
       <h3 class="my-5">¿Estas seguro que deseas eliminar?</h3>
       <div class="text-center">
-        <button class="btn btn-danger mx-2">Eliminar</button>
+        <button (click)="handleDelete()" class="btn btn-danger mx-2">
+          Eliminar
+        </button>
         <button (click)="closeModal()" class="btn btn-primary mx-2">
           Cancelar
         </button>
